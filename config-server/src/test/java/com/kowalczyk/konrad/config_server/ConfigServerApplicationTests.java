@@ -1,10 +1,10 @@
-package com.kowalczy.konrad.cantor;
+package com.kowalczyk.konrad.config_server;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CantorApplicationTests {
+class ConfigServerApplicationTests {
 
 	@Test
 	void contextLoads() {

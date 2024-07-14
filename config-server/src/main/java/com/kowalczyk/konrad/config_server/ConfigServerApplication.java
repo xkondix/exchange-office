@@ -1,13 +1,13 @@
-package com.kowalczy.konrad.cantor;
+package com.kowalczyk.konrad.config_server;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CantorApplication {
+public class ConfigServerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CantorApplication.class, args);
+		SpringApplication.run(ConfigServerApplication.class, args);
 	}
 
 }
