@@ -8,5 +8,5 @@ eureka:
     registerWithEureka: false
 
 server:
-  port: 0
+  port: 8761
 
