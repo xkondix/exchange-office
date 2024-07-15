@@ -1,6 +1,6 @@
 spring:
   application:
-    name: "@spring.application.name@"
+    name: common
 
 eureka:
   client:
