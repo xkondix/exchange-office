@@ -15,5 +15,9 @@ eureka:
     hostname: api-exchange-${random.value}
 
 server:
-  port: 0
+  port: 8080
+
+urlExchange: http://api.nbp.pl
+
+
 
