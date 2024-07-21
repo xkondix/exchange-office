@@ -38,7 +38,7 @@
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webflux</artifactId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
         <dependency>
@@ -73,14 +73,8 @@
 
         <!--validation json/database-->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-validation</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>jakarta.persistence</groupId>
-            <artifactId>jakarta.persistence-api</artifactId>
-            <version>3.1.0</version>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
         </dependency>
 
         <dependency>
@@ -89,16 +83,11 @@
         </dependency>
 
         <dependency>
-            <groupId>io.swagger.codegen.v3</groupId>
-            <artifactId>swagger-codegen</artifactId>
-            <version>3.0.58</version>
-        </dependency>
-
-        <dependency>
             <groupId>com.kowalczyk.konrad</groupId>
             <artifactId>common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+
 
     </dependencies>
 

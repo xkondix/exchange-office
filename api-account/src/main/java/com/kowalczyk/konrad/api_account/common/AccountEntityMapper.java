@@ -5,7 +5,7 @@ import com.kowalczyk.konrad.api_account.rest.input.Account;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-@Mapper(componentModel = "spring", uses = {AccountEntityMapper.class, Account.class}
+@Mapper(componentModel = "spring", uses = {AccountEntity.class, Account.class}
         , unmappedTargetPolicy = org.mapstruct.ReportingPolicy.IGNORE)
 
 public interface AccountEntityMapper {

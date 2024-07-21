@@ -1,13 +1,8 @@
 package com.kowalczyk.konrad.api_account.rest.input;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.kowalczyk.konrad.api_account.validation.annotation.PeselAgeValid;
-import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import com.kowalczyk.konrad.api_account.validation.annotation.PeselValid;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,22 +13,20 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Account {
 
-    @Schema(requiredMode = Schema.RequiredMode.REQUIRED)
-    @Size(min = 11, max = 11)
-    @PeselAgeValid
+    @PeselValid
     private String pesel;
 
-    @Schema(requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotBlank(message = "First name is mandatory")
     private String firstName;
 
-    @Schema(requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotBlank(message = "Last name is mandatory")
     private String lastName;
 
-    @Schema(requiredMode = Schema.RequiredMode.REQUIRED)
-    @Min(value = 0, message = "Initial balance must be non-negative")
-    private double balance;
+    @NotNull(message = "Balance  is mandatory")
+    @DecimalMin(value = "0.0", inclusive = false, message = "Balance must be greater than zero")
+    private Double balance;
 
-    @Schema(requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotBlank(message = "Currency  is mandatory")
     private String currency;
 
 }
