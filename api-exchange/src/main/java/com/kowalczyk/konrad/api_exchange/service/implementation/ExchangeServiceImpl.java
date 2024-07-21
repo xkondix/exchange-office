@@ -1,6 +1,7 @@
 package com.kowalczyk.konrad.api_exchange.service.implementation;
 
 import com.kowalczyk.konrad.api_exchange.repository.AccountRepository;
+import com.kowalczyk.konrad.api_exchange.rest.input.CurrencyExchangeRequest;
 import com.kowalczyk.konrad.api_exchange.rest.output.AccountBalanceDTO;
 import com.kowalczyk.konrad.api_exchange.service.ExchangeService;
 import com.kowalczyk.konrad.api_exchange.service.WebClientService;
@@ -65,4 +66,42 @@ public class ExchangeServiceImpl implements ExchangeService {
     private void getFirstTimeExchangeRateCache() {
         refreshRateCache();
     }
+
+    @Override
+    public Mono<String> changeCurrencyValue(CurrencyExchangeRequest request) {
+        if ("PLN".equalsIgnoreCase(request.getFromCurrency())) {
+            return webClientService.getCurrentExchangeRate("A", request.getToCurrency())
+                    .map(rate -> request.getValue() / rate + " " + request.getToCurrency().toUpperCase());
+        } else if ("PLN".equalsIgnoreCase(request.getToCurrency())) {
+            return webClientService.getCurrentExchangeRate("A", request.getFromCurrency())
+                    .map(rate -> request.getValue() * rate + " " + request.getToCurrency().toUpperCase());
+        } else {
+            Mono<Double> fromRateMono = webClientService.getCurrentExchangeRate("A", request.getFromCurrency());
+            Mono<Double> toRateMono = webClientService.getCurrentExchangeRate("A", request.getToCurrency());
+
+            return Mono.zip(fromRateMono, toRateMono)
+                    .map(tuple -> {
+                        double fromRate = tuple.getT1();
+                        double toRate = tuple.getT2();
+                        double valuePln = request.getValue() * fromRate;
+                        double valueInTargetCurrency = valuePln / toRate;
+                        return valueInTargetCurrency + " " + request.getToCurrency().toUpperCase(); //StringUtils.SPACE not work? java 21
+                    });
+        }
+    }
+
+    private void comment() {
+        //worse than zip?
+//        return Mono.when(fromRateMono, toRateMono)
+//                .then(Mono.defer(() -> {
+//                    return fromRateMono.zipWith(toRateMono, (fromRate, toRate) -> {
+//                        double valueInPln = request.getValue() * fromRate;
+//                        double valueInTargetCurrency = valueInPln / toRate;
+//                        return valueInTargetCurrency + " " + request.getToCurrency().toUpperCase();
+//                    });
+//                }));
+//    }
+    }
+
 }
+

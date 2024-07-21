@@ -1,15 +1,13 @@
 package com.kowalczyk.konrad.api_exchange.controller;
 
+import com.kowalczyk.konrad.api_exchange.rest.input.CurrencyExchangeRequest;
 import com.kowalczyk.konrad.api_exchange.rest.output.AccountBalanceDTO;
 import com.kowalczyk.konrad.api_exchange.service.ExchangeService;
 import com.kowalczyk.konrad.common.validation.annotation.PeselValid;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 @Validated
@@ -34,5 +32,12 @@ public class ExchangeController {
         return exchangeService.getAccount(pesel)
                 .map(ResponseEntity::ok)
                 .defaultIfEmpty(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/getCurrencyValue")
+    public Mono<ResponseEntity<String>> getAccountBalance(@RequestBody @Valid CurrencyExchangeRequest request) {
+        return exchangeService.changeCurrencyValue(request)
+                .map(ResponseEntity::ok)
+                .defaultIfEmpty(ResponseEntity.internalServerError().build());
     }
 }
