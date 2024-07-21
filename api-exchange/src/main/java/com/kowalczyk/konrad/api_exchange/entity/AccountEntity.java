@@ -1,14 +1,15 @@
 package com.kowalczyk.konrad.api_exchange.entity;
 
 import com.kowalczyk.konrad.common.Role;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
 
 
-@Entity
-@Table(name = AccountEntity.TABLE_NAME)
+@Table(AccountEntity.TABLE_NAME)
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -17,31 +18,23 @@ public class AccountEntity {
     public static final String TABLE_NAME = "api_account";
 
     @Id
-    @Column(name = "pesel")
+    @Column("pesel")
     private String pesel;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "role")
+    @Column("role")
     private Role role;
 
-    @Column(name = "first_name")
+    @Column("first_name")
     private String firstName;
 
-    @Column(name = "last_name")
+    @Column("last_name")
     private String lastName;
 
-    @Column(name = "balance")
+    @Column("balance")
     private double balance;
 
-    @Column(name = "currency")
+    @Column("currency")
     private String currency;
-
-    @PrePersist
-    protected void onCreate() {
-        if (this.role == null) {
-            this.role = Role.USER;
-        }
-    }
 
 
 }
