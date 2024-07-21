@@ -11,7 +11,7 @@ public class AccountBalanceDTO {
 
     private String firstName;
     private String lastName;
-    private String balanceInPln;
-    private String balanceInUsd;
+    private String balancePln;
+    private String balanceUsd;
 
 }

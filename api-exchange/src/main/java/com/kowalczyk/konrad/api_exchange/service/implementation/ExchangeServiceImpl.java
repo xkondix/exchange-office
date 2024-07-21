@@ -45,7 +45,7 @@ public class ExchangeServiceImpl implements ExchangeService {
                                     account.getFirstName(),
                                     account.getLastName(),
                                     balanceInPln + " PLN",
-                                    balanceInUsd + " USD"
+                                    balanceInUsd + " DOL"
                             );
                         })
                 );
