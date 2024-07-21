@@ -33,3 +33,5 @@ json -> {
 "balance": 1000.55,
 "currency": "PLN"
 }
+
+set up your own local mysql connection
