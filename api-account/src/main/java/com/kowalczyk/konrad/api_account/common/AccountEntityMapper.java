@@ -5,9 +5,10 @@ import com.kowalczyk.konrad.api_account.rest.input.Account;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-@Mapper(componentModel = "spring", unmappedTargetPolicy = org.mapstruct.ReportingPolicy.IGNORE)
-
+@Mapper(componentModel = "spring")
 public interface AccountEntityMapper {
+
+    public final AccountEntityMapper ACCOUNT_ENTITY_MAPPER = Mappers.getMapper(AccountEntityMapper.class);
 
     Account accountEntityToAccount(AccountEntity accountEntity);
 

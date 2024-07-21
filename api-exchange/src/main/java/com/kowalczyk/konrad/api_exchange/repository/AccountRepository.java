@@ -1,6 +1,7 @@
-package com.kowalczyk.konrad.api_account.repository;
+package com.kowalczyk.konrad.api_exchange.repository;
 
-import com.kowalczyk.konrad.api_account.entity.AccountEntity;
+
+import com.kowalczyk.konrad.api_exchange.entity.AccountEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AccountRepository extends JpaRepository<AccountEntity, String> {
