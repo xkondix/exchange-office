@@ -1,6 +1,6 @@
-package com.kowalczyk.konrad.api_account.validation.annotation;
+package com.kowalczyk.konrad.common.validation.annotation;
 
-import com.kowalczyk.konrad.api_account.validation.implementation.PeselValidator;
+import com.kowalczyk.konrad.common.validation.implementation.PeselValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
@@ -10,8 +10,9 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.PARAMETER;
 
-@Target({FIELD})
+@Target({FIELD, PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Constraint(validatedBy = PeselValidator.class)

@@ -1,11 +1,10 @@
-package com.kowalczyk.konrad.api_account.entity;
+package com.kowalczyk.konrad.api_exchange.entity;
 
 import com.kowalczyk.konrad.common.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.domain.Persistable;
 
 
 @Entity

@@ -1,7 +1,7 @@
 package com.kowalczyk.konrad.api_account.rest.input;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.kowalczyk.konrad.api_account.validation.annotation.PeselValid;
+import com.kowalczyk.konrad.common.validation.annotation.PeselValid;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

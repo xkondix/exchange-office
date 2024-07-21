@@ -1,15 +1,16 @@
 package com.kowalczyk.konrad.api_account.common;
 
 import com.kowalczyk.konrad.api_account.entity.AccountEntity;
-import com.kowalczyk.konrad.api_account.rest.input.Account;
 import com.kowalczyk.konrad.api_account.rest.output.AccountDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-@Mapper(componentModel = "spring", unmappedTargetPolicy = org.mapstruct.ReportingPolicy.IGNORE)
+@Mapper(componentModel = "spring")
 public interface AccountMapper {
 
-    AccountDTO accountToAccountDTO(Account account);
+    public final AccountMapper ACCOUNT_MAPPER = Mappers.getMapper(AccountMapper.class);
 
-    Account accountDTOToAccount(AccountDTO accountDTO);
+    AccountDTO accountEntityToAccountDTO(AccountEntity accountEntity);
+
+    AccountEntity accountDTOToAccountEntity(AccountDTO accountDTO);
 }

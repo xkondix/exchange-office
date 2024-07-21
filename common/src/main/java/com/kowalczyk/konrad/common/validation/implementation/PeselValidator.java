@@ -1,14 +1,12 @@
-package com.kowalczyk.konrad.api_account.validation.implementation;
+package com.kowalczyk.konrad.common.validation.implementation;
 
-import com.kowalczyk.konrad.api_account.validation.annotation.PeselValid;
+
+import com.kowalczyk.konrad.common.validation.annotation.PeselValid;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
-import org.springframework.web.bind.MethodArgumentNotValidException;
-
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.time.format.DateTimeParseException;
 import java.util.Objects;
 
 import static com.kowalczyk.konrad.common.ValidationHelper.*;
