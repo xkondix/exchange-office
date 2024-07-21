@@ -6,13 +6,14 @@ TODO
 - dockerfiles
 - clean maven
 - fix mapstruct
+- bootstrap.yaml -> application.yaml with import
   
 VM options
 
-api-account -> -Dspring.profiles.active=local
-api-exchange -> -Dspring.profiles.active=local
-config-server -> -Dspring.profiles.active=native
-eureka -> -Dspring.profiles.active=local 
+- api-account -> -Dspring.profiles.active=local
+- api-exchange -> -Dspring.profiles.active=local
+- config-server -> -Dspring.profiles.active=native
+- eureka -> -Dspring.profiles.active=local 
 
 Order to run
 1. mvn clean install -Plocal
@@ -22,10 +23,11 @@ Order to run
 
 example postman
 
-http://localhost:8080/api/exchange-usa
-http://localhost:8090/api/get?pesel=97101328412
-http://localhost:8080/api/getAccountBalance?pesel=97101328412
-http://localhost:8090/api/create 
+- http://localhost:8080/api/exchange-usa
+- http://localhost:8090/api/get?pesel=97101328412
+- http://localhost:8080/api/getAccountBalance?pesel=97101328412
+- http://localhost:8090/api/create
+
 json -> {
 "pesel": "97101328412",
 "firstName": "Jan",
@@ -33,5 +35,12 @@ json -> {
 "balance": 1000.55,
 "currency": "PLN"
 }
+
+- http://localhost:8080/api/getCurrencyValue
+json -> {
+  "fromCurrency": "usd",
+  "toCurrency": "gbp",
+  "value": 100
+  }
 
 set up your own local mysql connection
