@@ -20,6 +20,8 @@
 		<maven.compiler.target>21</maven.compiler.target>
 		<spring.profiles.active>local</spring.profiles.active>
 		<spring.profiles.include>native</spring.profiles.include>
+		<timestamp>${maven.build.timestamp}</timestamp>
+		<maven.build.timestamp.format>yyyy_MM_dd_HH_mm</maven.build.timestamp.format>
 	</properties>
 
 	<dependencies>
@@ -52,6 +54,31 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
 					<useSystemClassLoader>false</useSystemClassLoader>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>io.fabric8</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.45.0</version>
+				<executions>
+					<execution>
+						<id>build-image</id>
+						<phase>package</phase>
+						<goals>
+							<goal>build</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<images>
+						<image>
+							<name>${project.artifactId}:${project.version}-${timestamp}</name>
+							<build>
+								<dockerFile>src/main/resources/config-server.dockerfile</dockerFile>
+								<contextDir>${project.basedir}</contextDir>
+							</build>
+						</image>
+					</images>
 				</configuration>
 			</plugin>
 		</plugins>
