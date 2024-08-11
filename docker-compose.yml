@@ -1,0 +1,65 @@
+version: '3.8'
+
+services:
+  eureka:
+#    image: ${DOCKER_REGISTRY:-localhost:5000}/eureka:latest
+    build:
+      context: ./eureka
+      dockerfile: src/main/resources/eureka.dockerfile
+    container_name: eureka
+    ports:
+      - "8761:8761"
+    environment:
+      - SPRING_PROFILES_ACTIVE=local
+      - hostName=eureka
+
+    networks:
+      - common-network
+
+  config-server:
+#    image: ${DOCKER_REGISTRY:-localhost:5000}/config-server:latest
+    build:
+      context: ./config-server
+      dockerfile: src/main/resources/config-server.dockerfile
+    container_name: config-server
+    depends_on:
+      - eureka
+    ports:
+      - "8888:8888"
+    environment:
+      - SPRING_PROFILES_ACTIVE=native
+      - hostName=config-server
+    networks:
+      - common-network
+
+  api-exchange:
+#    image: ${DOCKER_REGISTRY:-localhost:5000}/api-exchange:latest
+    build:
+      context: ./api-exchange
+      dockerfile: src/main/resources/api-exchange.dockerfile
+    container_name: api-exchange
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=local
+    depends_on:
+#      - db
+      - config-server
+    networks:
+      - common-network
+
+
+#  db:
+#    image: mysql:8.0
+#    container_name: mysql-db
+#    environment:
+#      MYSQL_ROOT_PASSWORD: konrad
+#      MYSQL_DATABASE: 1234
+#    ports:
+#      - "3306:3306"
+#    networks:
+#      - app-network
+
+networks:
+  common-network:
+    driver: bridge
